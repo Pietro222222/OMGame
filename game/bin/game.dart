@@ -34,8 +34,12 @@ Future<void> main(List<String> arguments) async {
         if (rawPackage.length <= 1) {
           return;
         }
-        Package package = Package.fromJson(jsonDecode(rawPackage));
-        packageHandler(package, socket);
+        try {
+          Package package = Package.fromJson(jsonDecode(rawPackage));
+          packageHandler(package, socket);
+        } catch (_) {
+          //se nao der nao deu eh isso
+        }
       });
     },
     onError: (error) {
