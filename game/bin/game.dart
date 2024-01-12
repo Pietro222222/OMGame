@@ -23,6 +23,9 @@ Future<void> main(List<String> arguments) async {
 
   socket.write(json);
 
+  Game game = Game();
+  game.initGame();
+
   socket.listen(
     (Uint8List data) async {
       final message = String.fromCharCodes(data);
@@ -43,12 +46,11 @@ Future<void> main(List<String> arguments) async {
     // handle the client closing the connection
     onDone: () {
       print('Server disconnected');
+      game.exitGame();
       socket.close();
+      exit(1);
     },
   );
-
-  Game game = Game();
-  game.initGame();
 
   ReceivePort receivePort = ReceivePort();
 

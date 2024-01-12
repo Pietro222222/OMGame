@@ -43,15 +43,21 @@ class Game {
 
   void initGame() {
     console.clearScreen();
+    console.hideCursor();
     console.rawMode = true;
     drawPlayers();
   }
 
-  void exit() {
+  void exitGame() {
     console.rawMode = false;
+    console.showCursor();
   }
 
   void listen(int key) {
+    if (key == 27) {
+      exitGame();
+      exit(0);
+    }
     if (keys.containsKey(key)) {
       keys[key]!.function();
     }
