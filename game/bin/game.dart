@@ -12,7 +12,7 @@ import 'package:game/packages/package.dart';
 import 'package:game/ui/game_ui.dart';
 
 Future<void> main(List<String> arguments) async {
-  await gameSocket.connect();
+  await gameSocket.connect(arguments);
   var socket = gameSocket.socket;
 
   var json = jsonEncode(Package(
